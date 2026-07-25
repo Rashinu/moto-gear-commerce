@@ -1,0 +1,17 @@
+{
+  "name": "alanya-racing-motors",
+  "version": "1.0.0",
+  "description": "Alanya Racing Motors - basit e-ticaret vitrini + admin paneli",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "multer": "^2.0.0",
+    "cookie-parser": "^1.4.6"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
