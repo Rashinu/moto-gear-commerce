@@ -76,14 +76,45 @@ work. Use one of:
 - **VPS** (DigitalOcean, Hetzner, etc.): run `npm install && npm start`, point a domain
   at it (usually kept alive with a process manager like `pm2`).
 
-### Render.com free tier caveat
+### Render.com free tier caveat — and how this repo avoids it for free
 
 Render's free tier has an **ephemeral filesystem** — the service "sleeps" after 15
 minutes of inactivity, and on wake-up, any changes made from the admin panel (new
 products, deleted categories, uploaded images) reset to whatever is committed in this
-repo. Free tier is fine for demos, not for real inventory management. For persistence,
-use a paid plan + Persistent Disk (see render.com/docs/disks) — this repo's `server.js`
-already supports a `DATA_DIR` environment variable to point at a mounted disk.
+repo, if data is stored on the local disk (the default).
+
+This repo avoids both problems **without paying anything**:
+
+1. **Sleep**: set up a free uptime monitor (e.g. [UptimeRobot](https://uptimerobot.com),
+   free plan, 5-minute interval) pinging `https://YOUR-APP.onrender.com/api/storefront`.
+   This keeps the service from ever going idle long enough to spin down.
+2. **Data reset**: connect a free, permanent Postgres database (e.g.
+   [Neon.tech](https://neon.tech) — unlike Render's own free Postgres, which expires
+   after 30 days, Neon's free tier does not expire) and a free image host (e.g.
+   [Cloudinary](https://cloudinary.com)) instead of relying on local disk storage.
+
+#### Setting up free persistence (Neon + Cloudinary)
+
+1. **Create a free Neon.tech account** at https://neon.tech, create a project, and
+   copy its connection string (looks like
+   `postgres://user:password@ep-xxxx.neon.tech/dbname?sslmode=require`).
+2. **Create a free Cloudinary account** at https://cloudinary.com. On your dashboard
+   home page you'll find your **Cloud Name**, **API Key**, and **API Secret**.
+3. In your Render service, go to **Environment** and add these variables (paste the
+   values you just copied — Render's environment page is the right place to store
+   secrets, never commit them to the repo):
+   - `DATABASE_URL` = your Neon connection string
+   - `CLOUDINARY_CLOUD_NAME` = your Cloudinary cloud name
+   - `CLOUDINARY_API_KEY` = your Cloudinary API key
+   - `CLOUDINARY_API_SECRET` = your Cloudinary API secret
+4. Save — Render will redeploy automatically. On first boot, the app detects these
+   variables, creates the necessary tables in Neon, and seeds them from the bundled
+   `data/db.json`. From then on, every admin panel change (products, categories,
+   settings, uploaded images) is stored in Neon/Cloudinary and survives restarts,
+   redeploys, and sleep/wake cycles — permanently, for free.
+
+If you don't set these variables, the app works exactly as before (local JSON file +
+local disk) — useful for quick local testing without creating any accounts.
 
 ## Project structure
 
