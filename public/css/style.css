@@ -203,6 +203,21 @@ img { max-width: 100%; display: block; }
 .modal-stock { font-size: 13px; color: #2e7d32; margin-bottom: 18px; }
 .modal-desc { font-size: 13.5px; color: #555; margin-bottom: 20px; line-height: 1.6; }
 
+/* CHECKOUT MODAL */
+.checkout-modal {
+  background: var(--white); max-width: 420px; width: 92vw; margin: 12vh auto; border-radius: var(--radius);
+  padding: 26px; position: relative;
+}
+.checkout-modal .close-btn { position: absolute; top: 14px; right: 16px; font-size: 20px; }
+.checkout-modal h3 { font-size: 20px; margin-bottom: 8px; }
+.checkout-modal-desc { font-size: 13px; color: #555; margin-bottom: 18px; line-height: 1.5; }
+.checkout-modal .form-row { margin-bottom: 14px; display: flex; flex-direction: column; gap: 6px; }
+.checkout-modal label { font-size: 13px; color: #333; font-weight: 500; }
+.checkout-modal input {
+  padding: 10px 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; font-family: inherit; width: 100%; box-sizing: border-box;
+}
+.checkout-modal input:focus { outline: none; border-color: var(--gold); }
+
 @media (max-width: 900px) {
   .main-layout { grid-template-columns: 1fr; }
   .info-strip-inner { grid-template-columns: repeat(2, 1fr); }
