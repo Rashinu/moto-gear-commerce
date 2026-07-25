@@ -161,6 +161,26 @@
   </div>
 </div>
 
+<!-- CHECKOUT INFO MODAL -->
+<div id="checkoutModalOverlay" class="modal-overlay">
+  <div class="checkout-modal">
+    <button id="closeCheckoutModal" class="close-btn">✕</button>
+    <h3>Siparişi Tamamla</h3>
+    <p class="checkout-modal-desc">Sepetiniz WhatsApp üzerinden bize iletilecek. Devam etmek için ad ve soyadınızı girin.</p>
+    <form id="checkoutForm">
+      <div class="form-row">
+        <label for="checkoutFirstName">Ad</label>
+        <input type="text" id="checkoutFirstName" placeholder="Adınız" required>
+      </div>
+      <div class="form-row">
+        <label for="checkoutLastName">Soyad</label>
+        <input type="text" id="checkoutLastName" placeholder="Soyadınız" required>
+      </div>
+      <button type="submit" class="btn-primary full-width">WhatsApp'tan Gönder</button>
+    </form>
+  </div>
+</div>
+
 <script src="js/store.js"></script>
 </body>
 </html>
