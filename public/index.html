@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alanya Racing Motors | Motosiklet Aksesuar Mağazası</title>
+<meta name="description" content="Alanya Racing Motors - Motosiklet ve scooter aksesuarlarında kalite ve hız bir arada.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-top">
+    <div class="container header-top-inner">
+      <a href="#" class="logo">
+        <span class="logo-mark">ARM</span>
+        <span class="logo-text" id="siteNameText">Alanya <strong>Racing</strong> Motors</span>
+      </a>
+
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Ürün ara... (ör. Pcx, Tank Pad, Manet)">
+        <button id="searchBtn" aria-label="Ara">🔍</button>
+      </div>
+
+      <div class="header-actions">
+        <a href="#" id="headerPhone" class="header-phone">
+          <span>📞</span>
+          <span class="phone-text">Sipariş Hattı<br><strong id="headerPhoneText">...</strong></span>
+        </a>
+        <button id="cartBtn" class="cart-btn">
+          🛒 Sepet <span id="cartCount" class="cart-count">0</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <nav class="category-nav">
+    <div class="container" id="categoryNav"></div>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="heroSection">
+  <div class="container hero-inner">
+    <div class="hero-text">
+      <h1 id="heroTitle">Hız Tutkunları İçin<br><span id="heroHighlight">Kaliteli Aksesuar</span></h1>
+      <p id="heroSubtitle"></p>
+      <a href="#products" class="btn-primary">Ürünleri Keşfet</a>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN -->
+<main class="container main-layout" id="products">
+
+  <aside class="sidebar">
+    <h3>Kategoriler</h3>
+    <ul id="sidebarCategories" class="sidebar-categories"></ul>
+
+    <h3>Fiyata Göre Sırala</h3>
+    <select id="sortSelect" class="sort-select">
+      <option value="default">Listeleme Sırası</option>
+      <option value="price-asc">Fiyat, artan</option>
+      <option value="price-desc">Fiyat, azalan</option>
+      <option value="name-asc">İsim, A-Z</option>
+    </select>
+  </aside>
+
+  <section class="product-section">
+    <div class="product-section-header">
+      <h2 id="resultTitle">Tüm Ürünler</h2>
+      <span id="resultCount" class="result-count"></span>
+    </div>
+    <p id="loadingMsg" class="loading-msg">Ürünler yükleniyor...</p>
+    <div id="productGrid" class="product-grid"></div>
+    <p id="noResults" class="no-results" style="display:none;">Bu kategoride / aramada ürün bulunamadı.</p>
+  </section>
+</main>
+
+<!-- ABOUT / CONTACT STRIP -->
+<section class="info-strip">
+  <div class="container info-strip-inner">
+    <div class="info-item">
+      <h4>🚚 Hızlı Kargo</h4>
+      <p>Siparişler aynı gün / ertesi gün kargoya verilir.</p>
+    </div>
+    <div class="info-item">
+      <h4>🛡️ Güvenli Alışveriş</h4>
+      <p>Güvenli ödeme altyapısı ile sorunsuz alışveriş.</p>
+    </div>
+    <div class="info-item">
+      <h4>💬 Whatsapp Destek</h4>
+      <p>Sorularınız için satış öncesi/sonrası destek.</p>
+    </div>
+    <div class="info-item">
+      <h4>⭐ Kaliteli Ürün</h4>
+      <p>Özenle seçilmiş A kalite motosiklet aksesuarları.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-col">
+      <div class="logo footer-logo">
+        <span class="logo-mark">ARM</span>
+        <span class="logo-text" id="footerSiteName">Alanya Racing Motors</span>
+      </div>
+      <p>Motosiklet ve scooter tutkunları için kaliteli aksesuar mağazası.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Kurumsal</h4>
+      <ul>
+        <li><a href="#">İletişim</a></li>
+        <li><a href="#">Alışveriş Güvenliği</a></li>
+        <li><a href="#">Ön Bilgilendirme Formu</a></li>
+        <li><a href="#">Mesafeli Satış Sözleşmesi</a></li>
+        <li><a href="#">Kişisel Verilerin Korunması</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>İletişim</h4>
+      <ul>
+        <li id="footerPhone">📞 ...</li>
+        <li id="footerEmail">✉️ ...</li>
+        <li id="footerAddress">📍 ...</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">© 2026 <span id="footerCopyName">Alanya Racing Motors</span> — Tüm hakları saklıdır. · <a href="/admin.html" style="color:#666;">Yönetici Girişi</a></div>
+  </div>
+</footer>
+
+<!-- CART DRAWER -->
+<div id="cartOverlay" class="cart-overlay"></div>
+<aside id="cartDrawer" class="cart-drawer">
+  <div class="cart-drawer-header">
+    <h3>Sepetim</h3>
+    <button id="closeCart" class="close-btn">✕</button>
+  </div>
+  <div id="cartItems" class="cart-items"></div>
+  <div class="cart-footer">
+    <div class="cart-total-row">
+      <span>Toplam</span>
+      <strong id="cartTotal">0 TL</strong>
+    </div>
+    <button id="checkoutBtn" class="btn-primary full-width">Siparişi Tamamla (WhatsApp)</button>
+  </div>
+</aside>
+
+<!-- PRODUCT MODAL -->
+<div id="productModalOverlay" class="modal-overlay">
+  <div class="product-modal">
+    <button id="closeModal" class="close-btn">✕</button>
+    <div id="productModalBody" class="product-modal-body"></div>
+  </div>
+</div>
+
+<script src="js/store.js"></script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yönetim Paneli | Alanya Racing Motors</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-wrap" id="loginWrap">
+  <div class="login-box">
+    <h1>Yönetim Paneli</h1>
+    <p class="sub">Alanya Racing Motors</p>
+    <div class="login-error" id="loginError"></div>
+    <input type="password" id="loginPassword" placeholder="Şifre" autofocus>
+    <button id="loginBtn">Giriş Yap</button>
+    <div class="login-hint">İlk giriş şifresi sunucu konsolunda (terminal ekranında) yazılıdır. Giriş yaptıktan sonra "Şifre Değiştir" bölümünden değiştirin.</div>
+  </div>
+</div>
+
+<!-- ADMIN SHELL -->
+<div class="admin-shell" id="adminShell">
+  <aside class="admin-sidebar">
+    <div class="brand">ARM <span>Admin</span></div>
+    <nav class="admin-nav">
+      <button data-panel="panelProducts" class="active">📦 Ürünler</button>
+      <button data-panel="panelCategories">🗂️ Kategoriler</button>
+      <button data-panel="panelSettings">🎨 Site Ayarları / Banner</button>
+      <button data-panel="panelPassword">🔒 Şifre Değiştir</button>
+      <div class="divider"></div>
+      <button id="viewSiteBtn">🔗 Siteyi Görüntüle</button>
+      <button id="logoutBtn" class="logout-btn">↩ Çıkış Yap</button>
+    </nav>
+  </aside>
+
+  <main class="admin-main">
+
+    <!-- ÜRÜNLER -->
+    <section class="panel active" id="panelProducts">
+      <h2>Ürünler</h2>
+      <p class="page-sub">Ürünleri ekle, düzenle, sil ve sürükleyerek sıralamasını değiştir. Sıralama, sitedeki "Listeleme Sırası" görünümünü belirler.</p>
+      <div class="toolbar">
+        <input type="text" id="productSearch" placeholder="Ürün ara...">
+        <button class="btn btn-primary" id="addProductBtn">+ Yeni Ürün</button>
+      </div>
+      <div class="list-card">
+        <div class="list-row header-row">
+          <span></span><span>Görsel</span><span>Ürün / Kategori</span><span>Fiyat</span><span class="row-stock">Stok</span><span class="row-badge">Rozet</span><span>İşlemler</span>
+        </div>
+        <div id="productList"></div>
+      </div>
+    </section>
+
+    <!-- KATEGORİLER -->
+    <section class="panel" id="panelCategories">
+      <h2>Kategoriler</h2>
+      <p class="page-sub">Yeni kategori açabilir, isim değiştirebilir, sürükleyerek sırasını değiştirebilirsiniz.</p>
+      <div class="toolbar">
+        <input type="text" id="newCategoryInput" placeholder="Yeni kategori adı...">
+        <button class="btn btn-primary" id="addCategoryBtn">+ Kategori Ekle</button>
+      </div>
+      <div class="list-card" id="categoryList"></div>
+    </section>
+
+    <!-- SİTE AYARLARI -->
+    <section class="panel" id="panelSettings">
+      <h2>Site Ayarları / Banner</h2>
+      <p class="page-sub">Ana sayfa banner görseli/metni ve iletişim bilgilerini güncelleyin.</p>
+      <div class="settings-form">
+        <div class="form-row">
+          <label>Mağaza Adı</label>
+          <input type="text" id="setSiteName">
+        </div>
+        <div class="form-row">
+          <label>Banner Başlığı (1. satır)</label>
+          <input type="text" id="setHeroTitle">
+        </div>
+        <div class="form-row">
+          <label>Banner Başlığı (vurgulu 2. satır)</label>
+          <input type="text" id="setHeroHighlight">
+        </div>
+        <div class="form-row">
+          <label>Banner Alt Metni</label>
+          <textarea id="setHeroSubtitle"></textarea>
+        </div>
+        <div class="form-row">
+          <label>Banner Görseli</label>
+          <div class="upload-row">
+            <input type="file" id="heroImageInput" accept="image/*">
+          </div>
+          <img id="heroPreview" class="hero-preview" style="display:none;">
+        </div>
+        <div class="form-row">
+          <label>Telefon</label>
+          <input type="text" id="setPhone">
+        </div>
+        <div class="form-row">
+          <label>WhatsApp Numarası (ülke kodu ile, başında + olmadan — ör. 905551234567)</label>
+          <input type="text" id="setWhatsapp">
+        </div>
+        <div class="form-row">
+          <label>E-posta</label>
+          <input type="text" id="setEmail">
+        </div>
+        <div class="form-row">
+          <label>Adres</label>
+          <input type="text" id="setAddress">
+        </div>
+        <button class="btn btn-primary" id="saveSettingsBtn">Kaydet</button>
+      </div>
+    </section>
+
+    <!-- ŞİFRE -->
+    <section class="panel" id="panelPassword">
+      <h2>Şifre Değiştir</h2>
+      <p class="page-sub">Admin paneline giriş şifrenizi güncelleyin.</p>
+      <div class="settings-form">
+        <div class="form-row">
+          <label>Mevcut Şifre</label>
+          <input type="password" id="currentPassword">
+        </div>
+        <div class="form-row">
+          <label>Yeni Şifre (en az 6 karakter)</label>
+          <input type="password" id="newPassword">
+        </div>
+        <button class="btn btn-primary" id="changePasswordBtn">Şifreyi Güncelle</button>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ÜRÜN EKLE/DÜZENLE MODAL -->
+<div class="modal-bg" id="productModalBg">
+  <div class="modal-box">
+    <h3 id="productModalTitle">Yeni Ürün</h3>
+    <input type="hidden" id="productId">
+    <div class="form-row">
+      <label>Ürün Adı</label>
+      <input type="text" id="pName">
+    </div>
+    <div class="form-row">
+      <label>Kategori</label>
+      <select id="pCategory"></select>
+    </div>
+    <div class="form-row">
+      <label>Fiyat (TL)</label>
+      <input type="number" id="pPrice">
+    </div>
+    <div class="form-row">
+      <label>Eski Fiyat (indirim göstermek için, boş bırakılabilir)</label>
+      <input type="number" id="pOldPrice">
+    </div>
+    <div class="form-row">
+      <label>Rozet</label>
+      <select id="pBadge">
+        <option value="">Yok</option>
+        <option value="İndirim">İndirim</option>
+        <option value="Yeni">Yeni</option>
+        <option value="Son Ürün">Son Ürün</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label>Stok Adedi</label>
+      <input type="number" id="pStock">
+    </div>
+    <div class="form-row">
+      <label>Ürün Görseli</label>
+      <input type="file" id="pImageInput" accept="image/*">
+      <img id="pImagePreview" class="img-preview" style="display:none;">
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-secondary" id="cancelProductBtn">Vazgeç</button>
+      <button class="btn btn-primary" id="saveProductBtn">Kaydet</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/admin.js"></script>
+</body>
+</html>
