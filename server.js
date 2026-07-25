@@ -11,12 +11,28 @@ const path = require("path");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const DATA_FILE = path.join(__dirname, "data", "db.json");
-const AUTH_FILE = path.join(__dirname, "data", "auth.json");
-const UPLOAD_DIR = path.join(__dirname, "public", "uploads");
+// Bundled seed data (always ships in the repo, used to initialize a fresh persistent disk)
+const BUNDLED_SEED_FILE = path.join(__dirname, "data", "db.json");
+
+// If DATA_DIR is set (e.g. a Render Persistent Disk mount path), store live data there
+// instead of inside the repo checkout, so it survives deploys/restarts.
+const DATA_ROOT = process.env.DATA_DIR || path.join(__dirname, "data");
+const DATA_FILE = path.join(DATA_ROOT, "db.json");
+const AUTH_FILE = path.join(DATA_ROOT, "auth.json");
+const UPLOAD_DIR = process.env.DATA_DIR
+  ? path.join(process.env.DATA_DIR, "uploads")
+  : path.join(__dirname, "public", "uploads");
 const DEFAULT_PASSWORD = "alanya2026";
 
+if (!fs.existsSync(DATA_ROOT)) fs.mkdirSync(DATA_ROOT, { recursive: true });
 if (!fs.existsSync(UPLOAD_DIR)) fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+
+// First boot on a fresh persistent disk: seed it from the bundled data so the store
+// isn't empty. After this, DATA_FILE lives on the disk and survives restarts.
+if (process.env.DATA_DIR && !fs.existsSync(DATA_FILE) && fs.existsSync(BUNDLED_SEED_FILE)) {
+  fs.copyFileSync(BUNDLED_SEED_FILE, DATA_FILE);
+  console.log("Persistent disk had no data yet — seeded from bundled data/db.json");
+}
 
 // ---------- basit parola hash (scrypt) ----------
 function hashPassword(password, salt) {

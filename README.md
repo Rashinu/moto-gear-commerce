@@ -1,152 +1,102 @@
-# Alanya Racing Motors — E-Ticaret Sitesi + Yönetim Paneli
+# Moto Gear Commerce
 
-Motosiklet/scooter aksesuarları satan bir mağaza için hazırlanmış, admin panelinden
-tamamen yönetilebilen bir site. Ürün ekleme/silme/sıralama, kategori yönetimi ve
-banner/site ayarları admin panelinden yapılır; değişiklikler anında canlı siteye yansır.
+A full-stack e-commerce storefront with an admin dashboard, built with Node.js/Express.
+Products, categories, and homepage banner/settings are all managed from the admin panel —
+changes go live on the storefront immediately.
 
-## Gereksinim
+## Requirements
 
-Bilgisayarınızda **Node.js** kurulu olmalı (v18 veya üzeri). Yoksa: https://nodejs.org
-adresinden "LTS" sürümünü indirip kurun.
+**Node.js** (v18+) must be installed. If not: download the "LTS" version from
+https://nodejs.org
 
-## Çalıştırma
+## Running locally
 
-**Windows:** `start.bat` dosyasına çift tıklayın. Otomatik olarak gerekli paketleri
-kurar, sunucuyu başlatır ve tarayıcıda siteyi açar.
+**Windows:** double-click `start.bat`. It installs dependencies automatically, starts the
+server, and opens the site in your browser.
 
-**Mac / Linux:** Terminalde bu klasöre girip `./start.sh` çalıştırın.
+**Mac / Linux:** in this folder, run `./start.sh`.
 
-**Manuel:**
+**Manual:**
 ```bash
 npm install
 npm start
 ```
 
-Sonra tarayıcıda:
-- Mağaza: http://localhost:3000
-- Yönetim paneli: http://localhost:3000/admin.html
+Then in your browser:
+- Storefront: http://localhost:3000
+- Admin panel: http://localhost:3000/admin.html
 
-## İlk giriş
+## First login
 
-Sunucuyu ilk kez başlattığınızda terminalde şöyle bir mesaj görürsünüz:
-
-```
-İlk çalıştırma: admin şifresi otomatik oluşturuldu.
-Varsayılan şifre: alanya2026
-```
-
-Bu şifreyle admin paneline girin, ardından **"Şifre Değiştir"** bölümünden
-mutlaka kendi şifrenizi belirleyin.
-
-## Admin panelinden yapabilecekleriniz
-
-- **Ürünler**: ekle, düzenle, sil, sürükle-bırak ile sırala (site vitrinindeki
-  "Listeleme Sırası" bu sıraya göre çalışır). Her ürüne kendi bilgisayarınızdan
-  görsel yükleyebilirsiniz.
-- **Kategoriler**: yeni kategori açma, yeniden adlandırma, silme, sürükleyerek
-  sıralama. Bir kategori silinirse içindeki ürünler "Kategorisiz" olarak işaretlenir
-  (ürünler silinmez).
-- **Site Ayarları / Banner**: ana sayfa banner başlığı, alt metni, banner görseli,
-  telefon, WhatsApp numarası, e-posta ve adres.
-- **Şifre Değiştir**: admin giriş şifrenizi güncelleme.
-
-Tüm değişiklikler `data/db.json` dosyasında saklanır — bu dosyayı silmeyin,
-yedeğini almanız önerilir.
-
-## Sınırlamalar / henüz yapılmayanlar
-
-- **Ödeme altyapısı yok.** "Siparişi Tamamla" butonu şu an WhatsApp'a sipariş
-  özeti gönderir, kartla online ödeme almaz. Gerçek ödeme için:
-  - **iyzico** veya **PayTR** (Türkiye'de yaygın, kartla anlık tahsilat)
-  - **Shopier API** (mevcut Shopier mağazasıyla senkronize etmek isterseniz)
-  entegrasyonu ayrıca yapılmalı.
-- **Yasal metinler boş.** Footer'daki "Alışveriş Güvenliği", "Ön Bilgilendirme
-  Formu", "Mesafeli Satış Sözleşmesi", "Kişisel Verilerin Korunması" bağlantıları
-  şu an `#` — Türkiye'de e-ticaret için bu metinler zorunludur, gerçek içerikle
-  doldurulmalı.
-- **Tek admin kullanıcısı.** Şu an kullanıcı adı yok, sadece tek bir şifre var.
-  Birden fazla yönetici hesabı gerekiyorsa ayrıca eklenmelidir.
-- **Yerel dosya deposu.** Ürün görselleri `public/uploads` klasörüne kaydedilir.
-  Bir hosting sağlayıcısına taşırken bu klasörün de birlikte taşındığından/
-  yedeklendiğinden emin olun (bazı ücretsiz hosting'ler dosya sistemini kalıcı
-  tutmaz — bu durumda S3 / Cloudinary gibi bir görsel deposu gerekir).
-
-## Canlıya alma (internete açma)
-
-Bu artık bir arka uca (Node.js sunucusu) sahip olduğu için, sadece statik dosya
-barındıran hizmetler (GitHub Pages gibi) yeterli olmaz. Şunlardan biri gerekir:
-
-- **Render.com** veya **Railway.app**: Node.js projelerini ücretsiz/düşük maliyetle
-  barındırır, GitHub reposu bağlayıp otomatik deploy edebilirsiniz.
-- **VPS** (DigitalOcean, Hetzner, vb.): `npm install && npm start` ile çalıştırıp
-  bir domain bağlarsınız (genelde `pm2` gibi bir process manager ile arka planda
-  sürekli çalıştırılır).
-
-Bir domain (örn. alanyaracingmotors.com) alıp yukarıdaki servislerden birine
-bağlamanız gerekir.
-
-## Klasör yapısı
+On first run, the server console prints something like:
 
 ```
-arm-site/
-├── server.js              → Express sunucusu + tüm API uçları
+First run: an admin password was generated automatically.
+Default password: alanya2026
+```
+
+Log in with that password, then go to **"Change Password"** and set your own.
+
+## What you can do from the admin panel
+
+- **Products**: add, edit, delete, drag-and-drop reorder (this order drives the
+  storefront's default listing order). Upload a product image from your own computer.
+- **Categories**: create, rename, delete, drag-and-drop reorder. Deleting a category
+  that still has products in it reassigns those products to "Uncategorized" (products
+  are never deleted).
+- **Site Settings / Banner**: homepage banner title, subtitle, banner image, phone,
+  WhatsApp number, email, and address.
+- **Change Password**: update your admin login password.
+
+All changes are stored in `data/db.json` — don't delete this file, and keep backups.
+
+## Current limitations
+
+- **No payment gateway.** The "Complete Order" button currently sends an order summary
+  to WhatsApp; it does not process card payments. For real online payments you'd need
+  to integrate:
+  - **iyzico** or **PayTR** (popular in Turkey, instant card processing)
+  - Or a **Shopier API** integration if syncing with an existing Shopier store
+- **Legal pages are empty.** The footer links ("Shopping Safety", "Pre-Info Form",
+  "Distance Sales Agreement", "Personal Data Protection") are placeholders (`#`) —
+  required by law for e-commerce in Turkey, need real content.
+- **Single admin user.** No username, just one shared password. Add multi-user support
+  if you need it.
+- **Local file storage.** Product images are saved to `public/uploads`. When moving to
+  a host, make sure this folder is included/backed up (some free hosts don't persist
+  the filesystem — in that case you'd need S3/Cloudinary instead).
+
+## Deploying
+
+This app has a backend (Node.js server), so static-only hosts (like GitHub Pages) won't
+work. Use one of:
+
+- **Render.com** or **Railway.app**: host Node.js apps for free/low cost, connect your
+  GitHub repo for auto-deploy.
+- **VPS** (DigitalOcean, Hetzner, etc.): run `npm install && npm start`, point a domain
+  at it (usually kept alive with a process manager like `pm2`).
+
+### Render.com free tier caveat
+
+Render's free tier has an **ephemeral filesystem** — the service "sleeps" after 15
+minutes of inactivity, and on wake-up, any changes made from the admin panel (new
+products, deleted categories, uploaded images) reset to whatever is committed in this
+repo. Free tier is fine for demos, not for real inventory management. For persistence,
+use a paid plan + Persistent Disk (see render.com/docs/disks) — this repo's `server.js`
+already supports a `DATA_DIR` environment variable to point at a mounted disk.
+
+## Project structure
+
+```
+├── server.js              → Express server + all API routes
 ├── package.json
 ├── data/
-│   ├── db.json             → ürünler, kategoriler, ayarlar (asıl veri)
-│   └── auth.json           → admin şifre hash'i (otomatik oluşur)
+│   ├── db.json             → products, categories, settings (source of truth)
+│   └── auth.json           → admin password hash (auto-generated)
 ├── public/
-│   ├── index.html          → mağaza vitrini
-│   ├── admin.html           → yönetim paneli
-│   ├── css/, js/            → stiller ve mantık
-│   └── uploads/             → yüklenen ürün/banner görselleri
-├── start.bat / start.sh     → tek tıkla başlatma
+│   ├── index.html          → storefront
+│   ├── admin.html          → admin dashboard
+│   ├── css/, js/            → styles and client logic
+│   └── uploads/             → uploaded product/banner images
+├── start.bat / start.sh     → one-click startup
 ```
-
-## Render.com'a ücretsiz deploy (sadece deneme/gösterim için)
-
-**Önemli:** Render'ın ücretsiz planında dosya sistemi kalıcı değildir. Servis
-15 dakika işlem almayınca "uyur", bir sonraki istekte yeniden başlar — bu sırada
-`data/db.json`'a admin panelden yaptığınız değişiklikler (yeni ürün, silinen
-kategori, yüklenen görsel) sıfırlanır ve depoya (GitHub) yüklediğiniz haline
-döner. Bu yüzden ücretsiz plan gerçek/kalıcı bir mağaza yönetimi için uygun
-değildir — sadece tasarımı ve işlevleri göstermek/denemek içindir. Kalıcı
-olması için ücretli plan + Persistent Disk gerekir (bkz. Render dokümantasyonu:
-render.com/docs/disks).
-
-### Adımlar
-
-1. **GitHub'a yükleyin.** Bu klasörde (terminalde):
-   ```bash
-   git init
-   git add .
-   git commit -m "İlk sürüm"
-   ```
-   GitHub'da yeni bir repo oluşturun (github.com/new, README eklemeden),
-   sonra:
-   ```bash
-   git remote add origin https://github.com/KULLANICI_ADINIZ/REPO_ADI.git
-   git branch -M main
-   git push -u origin main
-   ```
-
-2. **Render'da servis oluşturun.** render.com'a GitHub hesabınızla giriş yapın →
-   **New +** → **Web Service** → az önce push ettiğiniz repoyu seçin.
-   - Environment: **Node**
-   - Build Command: `npm install`
-   - Start Command: `npm start`
-   - Instance Type: **Free**
-   - (Bu depodaki `render.yaml` dosyası bu ayarları otomatik önerecektir.)
-   - **Create Web Service**'e tıklayın.
-
-3. **İlk şifreyi görün.** Deploy bitince servisin **Logs** sekmesinde
-   "Varsayılan şifre: alanya2026" satırını arayın (her yeniden başlamada
-   aynı şifre tekrar basılır çünkü dosya sıfırlanıyor).
-
-4. Size verilen `https://SIZIN-SERVIS-ADINIZ.onrender.com` adresi mağazanız,
-   `/admin.html` ise yönetim paneli olur.
-
-5. **Uyku modu notu:** 15 dakika sonra servis uyur; sonraki ilk ziyaret
-   30-50 saniye sürebilir (Render'ın ücretsiz planının doğal davranışı).
-
-Gerçek/kalıcı bir yönetim paneli isterseniz, bana söyleyin — ücretli plan +
-Persistent Disk için `server.js`'deki veri yollarını buna göre güncelleriz.
