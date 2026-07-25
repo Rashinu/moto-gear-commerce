@@ -1,0 +1,457 @@
+{
+  "settings": {
+    "siteName": "Alanya Racing Motors",
+    "heroTitle": "Hız Tutkunları İçin",
+    "heroHighlight": "Kaliteli Aksesuar",
+    "heroSubtitle": "Manet, koruma seti, tank pad, karbon ürün ve daha fazlası — Alanya'dan Türkiye'nin her yerine hızlı kargo.",
+    "heroImage": "",
+    "phone": "+90 555 000 00 00",
+    "whatsapp": "905550000000",
+    "email": "info@alanyaracingmotors.com",
+    "address": "Alanya, Antalya"
+  },
+  "categories": [
+    {
+      "id": "cat-1",
+      "name": "Manet",
+      "order": 1
+    },
+    {
+      "id": "cat-2",
+      "name": "Manet Koruma",
+      "order": 2
+    },
+    {
+      "id": "cat-3",
+      "name": "Elcik",
+      "order": 3
+    },
+    {
+      "id": "cat-4",
+      "name": "Koruma Takozları",
+      "order": 4
+    },
+    {
+      "id": "cat-5",
+      "name": "Aynalar",
+      "order": 5
+    },
+    {
+      "id": "cat-6",
+      "name": "Aks Korumaları",
+      "order": 6
+    },
+    {
+      "id": "cat-7",
+      "name": "Egzoz Korumaları",
+      "order": 7
+    },
+    {
+      "id": "cat-8",
+      "name": "Tank Pad",
+      "order": 8
+    },
+    {
+      "id": "cat-9",
+      "name": "Egzoz",
+      "order": 9
+    },
+    {
+      "id": "cat-10",
+      "name": "Plaka Buffları",
+      "order": 10
+    },
+    {
+      "id": "cat-11",
+      "name": "Depo Tutamaçı",
+      "order": 11
+    },
+    {
+      "id": "cat-12",
+      "name": "Ön Cam",
+      "order": 12
+    },
+    {
+      "id": "cat-13",
+      "name": "Renkli Vida Pulları",
+      "order": 13
+    },
+    {
+      "id": "cat-14",
+      "name": "Naked / Scooter Setleri",
+      "order": 14
+    },
+    {
+      "id": "cat-15",
+      "name": "Pcx Ürünleri",
+      "order": 15
+    },
+    {
+      "id": "cat-16",
+      "name": "Far Filmleri",
+      "order": 16
+    },
+    {
+      "id": "cat-17",
+      "name": "Sticker",
+      "order": 17
+    },
+    {
+      "id": "cat-18",
+      "name": "Karbon Ürünler",
+      "order": 18
+    },
+    {
+      "id": "cat-19",
+      "name": "Paspas",
+      "order": 19
+    },
+    {
+      "id": "cat-20",
+      "name": "RGB Aydınlatma",
+      "order": 20
+    },
+    {
+      "id": "cat-21",
+      "name": "Koltuk",
+      "order": 21
+    },
+    {
+      "id": "cat-22",
+      "name": "Radyatör Kapakları",
+      "order": 22
+    }
+  ],
+  "products": [
+    {
+      "id": "p-1",
+      "name": "CNC Manet Seti (Kırmızı)",
+      "category": "Manet",
+      "price": 1450,
+      "oldPrice": 1800,
+      "badge": "İndirim",
+      "stock": 12,
+      "img": "https://placehold.co/500x500/1a1a1a/e6b800?font=roboto&text=Manet+Kirmizi",
+      "order": 1
+    },
+    {
+      "id": "p-2",
+      "name": "CNC Manet Seti (Siyah)",
+      "category": "Manet",
+      "price": 1450,
+      "oldPrice": 1800,
+      "badge": "İndirim",
+      "stock": 9,
+      "img": "https://placehold.co/500x500/1a1a1a/e6b800?font=roboto&text=Manet+Siyah",
+      "order": 2
+    },
+    {
+      "id": "p-3",
+      "name": "Manet Koruma Kılıfı (Karbon Desen)",
+      "category": "Manet Koruma",
+      "price": 620,
+      "oldPrice": null,
+      "badge": "Yeni",
+      "stock": 20,
+      "img": "https://placehold.co/500x500/1a1a1a/e6b800?font=roboto&text=Manet+Koruma",
+      "order": 3
+    },
+    {
+      "id": "p-4",
+      "name": "Üniversal Elcik Seti",
+      "category": "Elcik",
+      "price": 890,
+      "oldPrice": 1100,
+      "badge": "İndirim",
+      "stock": 15,
+      "img": "https://placehold.co/500x500/1a1a1a/e6b800?font=roboto&text=Elcik+Seti",
+      "order": 4
+    },
+    {
+      "id": "p-5",
+      "name": "Düşme Koruma Takozu (Çift)",
+      "category": "Koruma Takozları",
+      "price": 750,
+      "oldPrice": null,
+      "badge": null,
+      "stock": 30,
+      "img": "https://placehold.co/500x500/1a1a1a/e6b800?font=roboto&text=Koruma+Takozu",
+      "order": 5
+    },
+    {
+      "id": "p-6",
+      "name": "Bukalemun Ayna V2 - Lazer Yazılı",
+      "category": "Aynalar",
+      "price": 1550,
+      "oldPrice": 2100,
+      "badge": "İndirim",
+      "stock": 6,
+      "img": "https://placehold.co/500x500/1a1a1a/e6b800?font=roboto&text=Bukalemun+Ayna",
+      "order": 6
+    },
+    {
+      "id": "p-7",
+      "name": "Karbon Desen Ayna Kapağı",
+      "category": "Aynalar",
+      "price": 1250,
+      "oldPrice": 2000,
+      "badge": "Son Ürün",
+      "stock": 2,
+      "img": "https://placehold.co/500x500/1a1a1a/e6b800?font=roboto&text=Ayna+Kapak",
+      "order": 7
+    },
+    {
+      "id": "p-8",
+      "name": "Aks Koruma Seti (Gold)",
+      "category": "Aks Korumaları",
+      "price": 980,
+      "oldPrice": null,
+      "badge": null,
+      "stock": 18,
+      "img": "https://placehold.co/500x500/1a1a1a/e6b800?font=roboto&text=Aks+Koruma",
+      "order": 8
+    },
+    {
+      "id": "p-9",
+      "name": "Egzoz Ucu Koruma Kapağı",
+      "category": "Egzoz Korumaları",
+      "price": 540,
+      "oldPrice": 700,
+      "badge": "İndirim",
+      "stock": 25,
+      "img": "https://placehold.co/500x500/1a1a1a/e6b800?font=roboto&text=Egzoz+Koruma",
+      "order": 9
+    },
+    {
+      "id": "p-10",
+      "name": "3D Silikon Tank Pad",
+      "category": "Tank Pad",
+      "price": 430,
+      "oldPrice": null,
+      "badge": "Yeni",
+      "stock": 40,
+      "img": "https://placehold.co/500x500/1a1a1a/e6b800?font=roboto&text=Tank+Pad",
+      "order": 10
+    },
+    {
+      "id": "p-11",
+      "name": "Karbon Egzoz Seti A Kalite",
+      "category": "Egzoz",
+      "price": 2150,
+      "oldPrice": 3200,
+      "badge": "İndirim",
+      "stock": 4,
+      "img": "https://placehold.co/500x500/1a1a1a/e6b800?font=roboto&text=Egzoz+Seti",
+      "order": 11
+    },
+    {
+      "id": "p-12",
+      "name": "Renkli Plaka Buffu (Mor)",
+      "category": "Plaka Buffları",
+      "price": 320,
+      "oldPrice": 500,
+      "badge": "İndirim",
+      "stock": 22,
+      "img": "https://placehold.co/500x500/1a1a1a/e6b800?font=roboto&text=Plaka+Buff",
+      "order": 12
+    },
+    {
+      "id": "p-13",
+      "name": "Renkli Plaka Buffu (Yeşil)",
+      "category": "Plaka Buffları",
+      "price": 320,
+      "oldPrice": 500,
+      "badge": "İndirim",
+      "stock": 17,
+      "img": "https://placehold.co/500x500/1a1a1a/e6b800?font=roboto&text=Plaka+Buff+Yesil",
+      "order": 13
+    },
+    {
+      "id": "p-14",
+      "name": "CNC Depo Tutamacı Seti",
+      "category": "Depo Tutamaçı",
+      "price": 1050,
+      "oldPrice": null,
+      "badge": null,
+      "stock": 11,
+      "img": "https://placehold.co/500x500/1a1a1a/e6b800?font=roboto&text=Depo+Tutamac",
+      "order": 14
+    },
+    {
+      "id": "p-15",
+      "name": "Sis Önleyici Ön Cam (Duman)",
+      "category": "Ön Cam",
+      "price": 890,
+      "oldPrice": 1200,
+      "badge": "İndirim",
+      "stock": 13,
+      "img": "https://placehold.co/500x500/1a1a1a/e6b800?font=roboto&text=On+Cam",
+      "order": 15
+    },
+    {
+      "id": "p-16",
+      "name": "Renkli Vida Pulu Seti (12 Parça)",
+      "category": "Renkli Vida Pulları",
+      "price": 280,
+      "oldPrice": 450,
+      "badge": "İndirim",
+      "stock": 50,
+      "img": "https://placehold.co/500x500/1a1a1a/e6b800?font=roboto&text=Vida+Pulu",
+      "order": 16
+    },
+    {
+      "id": "p-17",
+      "name": "Naked Motor Koruma Seti (5 Parça)",
+      "category": "Naked / Scooter Setleri",
+      "price": 2650,
+      "oldPrice": 3500,
+      "badge": "İndirim",
+      "stock": 5,
+      "img": "https://placehold.co/500x500/1a1a1a/e6b800?font=roboto&text=Naked+Set",
+      "order": 17
+    },
+    {
+      "id": "p-18",
+      "name": "Scooter Konfor Seti (4 Parça)",
+      "category": "Naked / Scooter Setleri",
+      "price": 2350,
+      "oldPrice": null,
+      "badge": "Yeni",
+      "stock": 8,
+      "img": "https://placehold.co/500x500/1a1a1a/e6b800?font=roboto&text=Scooter+Set",
+      "order": 18
+    },
+    {
+      "id": "p-19",
+      "name": "Pcx Karbon Arka Grenaj (Sök Tak)",
+      "category": "Pcx Ürünleri",
+      "price": 1650,
+      "oldPrice": 2400,
+      "badge": "İndirim",
+      "stock": 7,
+      "img": "https://placehold.co/500x500/1a1a1a/e6b800?font=roboto&text=Pcx+Grenaj",
+      "order": 19
+    },
+    {
+      "id": "p-20",
+      "name": "Pcx A Kalite Paspas Takımı (Kırmızı)",
+      "category": "Pcx Ürünleri",
+      "price": 2850,
+      "oldPrice": 3100,
+      "badge": "Son Ürün",
+      "stock": 1,
+      "img": "https://placehold.co/500x500/1a1a1a/e6b800?font=roboto&text=Pcx+Paspas",
+      "order": 20
+    },
+    {
+      "id": "p-21",
+      "name": "Pcx CNC Yağ Çubuğu (Mavi)",
+      "category": "Pcx Ürünleri",
+      "price": 990,
+      "oldPrice": 1550,
+      "badge": "İndirim",
+      "stock": 14,
+      "img": "https://placehold.co/500x500/1a1a1a/e6b800?font=roboto&text=Pcx+Yag+Cubugu",
+      "order": 21
+    },
+    {
+      "id": "p-22",
+      "name": "Far Koruma Filmi (Duman)",
+      "category": "Far Filmleri",
+      "price": 350,
+      "oldPrice": null,
+      "badge": null,
+      "stock": 35,
+      "img": "https://placehold.co/500x500/1a1a1a/e6b800?font=roboto&text=Far+Filmi",
+      "order": 22
+    },
+    {
+      "id": "p-23",
+      "name": "Racing Şerit Sticker Seti",
+      "category": "Sticker",
+      "price": 240,
+      "oldPrice": 350,
+      "badge": "İndirim",
+      "stock": 60,
+      "img": "https://placehold.co/500x500/1a1a1a/e6b800?font=roboto&text=Sticker+Set",
+      "order": 23
+    },
+    {
+      "id": "p-24",
+      "name": "Karbon Gidon Kapağı",
+      "category": "Karbon Ürünler",
+      "price": 1050,
+      "oldPrice": 1950,
+      "badge": "İndirim",
+      "stock": 9,
+      "img": "https://placehold.co/500x500/1a1a1a/e6b800?font=roboto&text=Karbon+Gidon",
+      "order": 24
+    },
+    {
+      "id": "p-25",
+      "name": "Karbon Benzin Kapağı",
+      "category": "Karbon Ürünler",
+      "price": 1050,
+      "oldPrice": 1950,
+      "badge": "İndirim",
+      "stock": 6,
+      "img": "https://placehold.co/500x500/1a1a1a/e6b800?font=roboto&text=Karbon+Benzin",
+      "order": 25
+    },
+    {
+      "id": "p-26",
+      "name": "A Kalite Paspas Seti (Siyah)",
+      "category": "Paspas",
+      "price": 690,
+      "oldPrice": null,
+      "badge": null,
+      "stock": 24,
+      "img": "https://placehold.co/500x500/1a1a1a/e6b800?font=roboto&text=Paspas+Seti",
+      "order": 26
+    },
+    {
+      "id": "p-27",
+      "name": "RGB Jant İçi Aydınlatma Seti",
+      "category": "RGB Aydınlatma",
+      "price": 1200,
+      "oldPrice": 1600,
+      "badge": "İndirim",
+      "stock": 10,
+      "img": "https://placehold.co/500x500/1a1a1a/e6b800?font=roboto&text=RGB+Jant",
+      "order": 27
+    },
+    {
+      "id": "p-28",
+      "name": "RGB Alt Şasi Aydınlatma",
+      "category": "RGB Aydınlatma",
+      "price": 950,
+      "oldPrice": null,
+      "badge": "Yeni",
+      "stock": 16,
+      "img": "https://placehold.co/500x500/1a1a1a/e6b800?font=roboto&text=RGB+Sasi",
+      "order": 28
+    },
+    {
+      "id": "p-29",
+      "name": "Deri Görünümlü Koltuk Kılıfı",
+      "category": "Koltuk",
+      "price": 780,
+      "oldPrice": 990,
+      "badge": "İndirim",
+      "stock": 19,
+      "img": "https://placehold.co/500x500/1a1a1a/e6b800?font=roboto&text=Koltuk+Kilif",
+      "order": 29
+    },
+    {
+      "id": "p-30",
+      "name": "CNC Radyatör Kapağı (Gold)",
+      "category": "Radyatör Kapakları",
+      "price": 1350,
+      "oldPrice": 1800,
+      "badge": "İndirim",
+      "stock": 5,
+      "img": "https://placehold.co/500x500/1a1a1a/e6b800?font=roboto&text=Radyator+Kapak",
+      "order": 30
+    }
+  ]
+}
