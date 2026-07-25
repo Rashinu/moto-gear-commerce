@@ -213,7 +213,20 @@ function closeCartFn() { document.getElementById("cartDrawer").classList.remove(
 
 function checkout() {
   if (cart.length === 0) { alert("Sepetiniz boş."); return; }
+  document.getElementById("checkoutFirstName").value = "";
+  document.getElementById("checkoutLastName").value = "";
+  document.getElementById("checkoutModalOverlay").classList.add("open");
+}
+function closeCheckoutModal() { document.getElementById("checkoutModalOverlay").classList.remove("open"); }
+
+function sendOrderToWhatsapp(e) {
+  e.preventDefault();
+  const firstName = document.getElementById("checkoutFirstName").value.trim();
+  const lastName = document.getElementById("checkoutLastName").value.trim();
+  if (!firstName || !lastName) return;
+
   let msg = "Merhaba, aşağıdaki ürünleri sipariş etmek istiyorum:%0A%0A";
+  msg += `Ad Soyad: ${firstName} ${lastName}%0A%0A`;
   let total = 0;
   cart.forEach(item => {
     const p = PRODUCTS.find(x => x.id === item.id);
@@ -223,6 +236,12 @@ function checkout() {
   });
   msg += `%0AToplam: ${formatPrice(total)}`;
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, "_blank");
+
+  closeCheckoutModal();
+  cart = [];
+  saveCart();
+  renderCart();
+  closeCartFn();
 }
 
 document.getElementById("cartBtn").onclick = openCart;
@@ -231,6 +250,9 @@ document.getElementById("cartOverlay").onclick = closeCartFn;
 document.getElementById("closeModal").onclick = closeProductModal;
 document.getElementById("productModalOverlay").onclick = (e) => { if (e.target.id === "productModalOverlay") closeProductModal(); };
 document.getElementById("checkoutBtn").onclick = checkout;
+document.getElementById("closeCheckoutModal").onclick = closeCheckoutModal;
+document.getElementById("checkoutModalOverlay").onclick = (e) => { if (e.target.id === "checkoutModalOverlay") closeCheckoutModal(); };
+document.getElementById("checkoutForm").addEventListener("submit", sendOrderToWhatsapp);
 document.getElementById("sortSelect").onchange = (e) => { state.sort = e.target.value; renderProducts(); };
 document.getElementById("searchBtn").onclick = runSearch;
 document.getElementById("searchInput").addEventListener("keydown", (e) => { if (e.key === "Enter") runSearch(); });
