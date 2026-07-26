@@ -66,12 +66,9 @@ img { max-width: 100%; display: block; }
 
 .category-nav {
   background: var(--dark); overflow-x: auto; overflow-y: hidden;
-  scrollbar-width: thin; scrollbar-color: #444 var(--dark);
+  scrollbar-width: none; -ms-overflow-style: none;
 }
-.category-nav::-webkit-scrollbar { height: 5px; }
-.category-nav::-webkit-scrollbar-track { background: var(--dark); }
-.category-nav::-webkit-scrollbar-thumb { background: #444; border-radius: 3px; }
-.category-nav::-webkit-scrollbar-thumb:hover { background: #666; }
+.category-nav::-webkit-scrollbar { display: none; height: 0; width: 0; }
 .category-nav .container { display: flex; gap: 2px; padding-top: 0; padding-bottom: 0; }
 .cat-pill {
   padding: 12px 14px; font-size: 13px; color: #d8d8d8; white-space: nowrap; cursor: pointer;
