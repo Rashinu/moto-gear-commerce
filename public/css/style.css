@@ -64,9 +64,9 @@ img { max-width: 100%; display: block; }
   padding: 1px 7px; font-size: 12px; margin-left: 4px; font-weight: 700;
 }
 
-.category-nav-wrap { position: relative; background: var(--dark); }
+.category-nav-wrap { position: relative; background: var(--black); }
 .category-nav {
-  background: var(--dark); overflow-x: auto; overflow-y: hidden;
+  background: var(--black); overflow-x: auto; overflow-y: hidden;
   scrollbar-width: none; -ms-overflow-style: none;
 }
 .category-nav::-webkit-scrollbar { display: none; height: 0; width: 0; }
@@ -85,8 +85,8 @@ img { max-width: 100%; display: block; }
   color: #d8d8d8; font-size: 20px; line-height: 1; z-index: 5;
   display: flex; align-items: center; justify-content: center; transition: color 0.15s ease;
 }
-.cat-nav-arrow-left { left: 0; background: linear-gradient(to right, var(--dark) 55%, transparent); justify-content: flex-start; padding-left: 2px; }
-.cat-nav-arrow-right { right: 0; background: linear-gradient(to left, var(--dark) 55%, transparent); justify-content: flex-end; padding-right: 2px; }
+.cat-nav-arrow-left { left: 0; background: linear-gradient(to right, var(--black) 55%, transparent); justify-content: flex-start; padding-left: 2px; }
+.cat-nav-arrow-right { right: 0; background: linear-gradient(to left, var(--black) 55%, transparent); justify-content: flex-end; padding-right: 2px; }
 .cat-nav-arrow:hover { color: var(--gold); }
 
 /* HERO */
