@@ -188,6 +188,15 @@ async function writeDB(db) {
 function genId(prefix) {
   return `${prefix}-${Date.now().toString(36)}${Math.random().toString(36).slice(2, 7)}`;
 }
+const PLACEHOLDER_IMG = "https://placehold.co/500x500/1a1a1a/e6b800?text=Urun";
+// Ürünler eskiden tek "img" alanı kullanıyordu. Artık "images" dizisi (ilk eleman = kapak)
+// asıl kaynak; "img" alanı geriye dönük uyumluluk için images[0]'dan türetilir.
+function normalizeProduct(p) {
+  const images = Array.isArray(p.images) && p.images.length
+    ? p.images
+    : (p.img ? [p.img] : []);
+  return { ...p, images, img: images[0] || PLACEHOLDER_IMG };
+}
 function asyncRoute(fn) {
   return (req, res) => {
     Promise.resolve(fn(req, res)).catch((err) => {
@@ -245,7 +254,7 @@ function uploadToCloudinary(buffer) {
 app.get("/api/storefront", asyncRoute(async (req, res) => {
   const db = await readDB();
   const categories = [...db.categories].sort((a, b) => a.order - b.order);
-  const products = [...db.products].sort((a, b) => a.order - b.order);
+  const products = [...db.products].sort((a, b) => a.order - b.order).map(normalizeProduct);
   res.json({ settings: db.settings, categories, products });
 }));
 
@@ -293,7 +302,7 @@ app.post("/api/auth/change-password", requireAuth, asyncRoute(async (req, res) =
 
 app.get("/api/admin/products", requireAuth, asyncRoute(async (req, res) => {
   const db = await readDB();
-  res.json([...db.products].sort((a, b) => a.order - b.order));
+  res.json([...db.products].sort((a, b) => a.order - b.order).map(normalizeProduct));
 }));
 
 app.post("/api/admin/products", requireAuth, asyncRoute(async (req, res) => {
@@ -303,6 +312,9 @@ app.post("/api/admin/products", requireAuth, asyncRoute(async (req, res) => {
     return res.status(400).json({ error: "Ürün adı ve kategori zorunludur." });
   }
   const maxOrder = db.products.reduce((m, p) => Math.max(m, p.order || 0), 0);
+  const images = Array.isArray(body.images) && body.images.length
+    ? body.images
+    : (body.img ? [body.img] : []);
   const product = {
     id: genId("p"),
     name: body.name,
@@ -311,12 +323,13 @@ app.post("/api/admin/products", requireAuth, asyncRoute(async (req, res) => {
     oldPrice: body.oldPrice ? Number(body.oldPrice) : null,
     badge: body.badge || null,
     stock: Number(body.stock) || 0,
-    img: body.img || "https://placehold.co/500x500/1a1a1a/e6b800?text=Urun",
+    images,
+    img: images[0] || PLACEHOLDER_IMG,
     order: maxOrder + 1
   };
   db.products.push(product);
   await writeDB(db);
-  res.status(201).json(product);
+  res.status(201).json(normalizeProduct(product));
 }));
 
 app.put("/api/admin/products/:id", requireAuth, asyncRoute(async (req, res) => {
@@ -324,7 +337,10 @@ app.put("/api/admin/products/:id", requireAuth, asyncRoute(async (req, res) => {
   const idx = db.products.findIndex(p => p.id === req.params.id);
   if (idx === -1) return res.status(404).json({ error: "Ürün bulunamadı." });
   const body = req.body || {};
-  const existing = db.products[idx];
+  const existing = normalizeProduct(db.products[idx]);
+  const images = body.images !== undefined
+    ? (Array.isArray(body.images) ? body.images : [])
+    : existing.images;
   db.products[idx] = {
     ...existing,
     name: body.name ?? existing.name,
@@ -333,10 +349,11 @@ app.put("/api/admin/products/:id", requireAuth, asyncRoute(async (req, res) => {
     oldPrice: body.oldPrice !== undefined ? (body.oldPrice === null || body.oldPrice === "" ? null : Number(body.oldPrice)) : existing.oldPrice,
     badge: body.badge !== undefined ? (body.badge || null) : existing.badge,
     stock: body.stock !== undefined ? Number(body.stock) : existing.stock,
-    img: body.img ?? existing.img
+    images,
+    img: images[0] || PLACEHOLDER_IMG
   };
   await writeDB(db);
-  res.json(db.products[idx]);
+  res.json(normalizeProduct(db.products[idx]));
 }));
 
 app.delete("/api/admin/products/:id", requireAuth, asyncRoute(async (req, res) => {
