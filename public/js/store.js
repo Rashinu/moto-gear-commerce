@@ -253,6 +253,12 @@ document.getElementById("checkoutBtn").onclick = checkout;
 document.getElementById("closeCheckoutModal").onclick = closeCheckoutModal;
 document.getElementById("checkoutModalOverlay").onclick = (e) => { if (e.target.id === "checkoutModalOverlay") closeCheckoutModal(); };
 document.getElementById("checkoutForm").addEventListener("submit", sendOrderToWhatsapp);
+document.getElementById("catScrollLeft").onclick = () => {
+  document.querySelector(".category-nav").scrollBy({ left: -220, behavior: "smooth" });
+};
+document.getElementById("catScrollRight").onclick = () => {
+  document.querySelector(".category-nav").scrollBy({ left: 220, behavior: "smooth" });
+};
 document.getElementById("sortSelect").onchange = (e) => { state.sort = e.target.value; renderProducts(); };
 document.getElementById("searchBtn").onclick = runSearch;
 document.getElementById("searchInput").addEventListener("keydown", (e) => { if (e.key === "Enter") runSearch(); });
