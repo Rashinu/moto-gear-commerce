@@ -3,8 +3,9 @@
 let allProducts = [];
 let allCategories = [];
 let currentHeroImage = "";
-let currentProductImage = "";
+let currentProductImages = [];
 let draggedRow = null;
+let draggedGalleryIndex = null;
 
 // ---------- yardımcılar ----------
 function showToast(msg, isError) {
@@ -178,9 +179,8 @@ function openProductModal(id) {
   const isEdit = !!id;
   document.getElementById("productModalTitle").textContent = isEdit ? "Ürünü Düzenle" : "Yeni Ürün";
   document.getElementById("productId").value = id || "";
-  document.getElementById("pImagePreview").style.display = "none";
   document.getElementById("pImageInput").value = "";
-  currentProductImage = "";
+  currentProductImages = [];
 
   if (isEdit) {
     const p = allProducts.find(x => x.id === id);
@@ -190,9 +190,7 @@ function openProductModal(id) {
     document.getElementById("pOldPrice").value = p.oldPrice || "";
     document.getElementById("pBadge").value = p.badge || "";
     document.getElementById("pStock").value = p.stock;
-    currentProductImage = p.img;
-    const prev = document.getElementById("pImagePreview");
-    prev.src = p.img; prev.style.display = "block";
+    currentProductImages = Array.isArray(p.images) && p.images.length ? [...p.images] : (p.img ? [p.img] : []);
   } else {
     document.getElementById("pName").value = "";
     document.getElementById("pPrice").value = "";
@@ -200,24 +198,78 @@ function openProductModal(id) {
     document.getElementById("pBadge").value = "";
     document.getElementById("pStock").value = "10";
   }
+  renderImageGallery();
+  updateDiscountHint();
   document.getElementById("productModalBg").classList.add("open");
 }
 
 document.getElementById("addProductBtn").onclick = () => openProductModal(null);
 document.getElementById("cancelProductBtn").onclick = () => document.getElementById("productModalBg").classList.remove("open");
+document.getElementById("pAddImageBtn").onclick = () => document.getElementById("pImageInput").click();
+
+// ---------- ürün fotoğraf galerisi ----------
+function renderImageGallery() {
+  const gallery = document.getElementById("pImageGallery");
+  if (!currentProductImages.length) {
+    gallery.innerHTML = `<div class="gallery-empty">Henüz fotoğraf eklenmedi.</div>`;
+    return;
+  }
+  gallery.innerHTML = currentProductImages.map((url, i) => `
+    <div class="gallery-item" draggable="true" data-index="${i}">
+      ${i === 0 ? '<span class="cover-badge">Kapak</span>' : ""}
+      <img src="${url}" alt="Ürün fotoğrafı ${i + 1}">
+      <button type="button" class="remove-img" data-remove="${i}" title="Sil">×</button>
+    </div>
+  `).join("");
+
+  gallery.querySelectorAll(".remove-img").forEach(btn => {
+    btn.onclick = () => {
+      const i = Number(btn.dataset.remove);
+      currentProductImages.splice(i, 1);
+      renderImageGallery();
+    };
+  });
+
+  gallery.querySelectorAll(".gallery-item").forEach(item => {
+    item.addEventListener("dragstart", () => {
+      draggedGalleryIndex = Number(item.dataset.index);
+      item.classList.add("dragging");
+    });
+    item.addEventListener("dragend", () => {
+      item.classList.remove("dragging");
+      gallery.querySelectorAll(".gallery-item").forEach(x => x.classList.remove("drag-over"));
+    });
+    item.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      item.classList.add("drag-over");
+    });
+    item.addEventListener("dragleave", () => item.classList.remove("drag-over"));
+    item.addEventListener("drop", (e) => {
+      e.preventDefault();
+      const targetIndex = Number(item.dataset.index);
+      if (draggedGalleryIndex === null || draggedGalleryIndex === targetIndex) return;
+      const [moved] = currentProductImages.splice(draggedGalleryIndex, 1);
+      currentProductImages.splice(targetIndex, 0, moved);
+      draggedGalleryIndex = null;
+      renderImageGallery();
+    });
+  });
+}
 
 document.getElementById("pImageInput").addEventListener("change", async (e) => {
-  const file = e.target.files[0];
-  if (!file) return;
-  try {
-    const url = await uploadImage(file);
-    currentProductImage = url;
-    const prev = document.getElementById("pImagePreview");
-    prev.src = url; prev.style.display = "block";
-    showToast("Görsel yüklendi.");
-  } catch (err) {
-    showToast(err.message, true);
+  const files = Array.from(e.target.files || []);
+  if (!files.length) return;
+  for (const file of files) {
+    try {
+      const url = await uploadImage(file);
+      currentProductImages.push(url);
+      renderImageGallery();
+    } catch (err) {
+      showToast(err.message, true);
+    }
   }
+  e.target.value = "";
+  showToast(files.length > 1 ? "Fotoğraflar yüklendi." : "Fotoğraf yüklendi.");
 });
 
 async function uploadImage(file) {
@@ -229,6 +281,23 @@ async function uploadImage(file) {
   return data.url;
 }
 
+// ---------- indirim yüzdesi önizlemesi ----------
+function updateDiscountHint() {
+  const hint = document.getElementById("discountHint");
+  const price = Number(document.getElementById("pPrice").value);
+  const oldPrice = Number(document.getElementById("pOldPrice").value);
+  if (!price || !oldPrice || oldPrice <= price) {
+    hint.style.display = "none";
+    return;
+  }
+  const pct = Math.round((1 - price / oldPrice) * 100);
+  const diff = oldPrice - price;
+  hint.textContent = `%${pct} indirim — ${oldPrice} TL yerine ${price} TL (${diff} TL fark)`;
+  hint.style.display = "inline-block";
+}
+document.getElementById("pPrice").addEventListener("input", updateDiscountHint);
+document.getElementById("pOldPrice").addEventListener("input", updateDiscountHint);
+
 document.getElementById("saveProductBtn").onclick = async () => {
   const id = document.getElementById("productId").value;
   const payload = {
@@ -238,7 +307,7 @@ document.getElementById("saveProductBtn").onclick = async () => {
     oldPrice: document.getElementById("pOldPrice").value ? Number(document.getElementById("pOldPrice").value) : null,
     badge: document.getElementById("pBadge").value || null,
     stock: Number(document.getElementById("pStock").value) || 0,
-    img: currentProductImage || "https://placehold.co/500x500/1a1a1a/e6b800?text=Urun"
+    images: currentProductImages
   };
   if (!payload.name) { showToast("Ürün adı zorunludur.", true); return; }
   try {

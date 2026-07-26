@@ -137,9 +137,16 @@ function renderAll() { renderCategoryUI(); renderProducts(); }
 function openProductModal(id) {
   const p = PRODUCTS.find(x => x.id === id);
   if (!p) return;
+  const images = Array.isArray(p.images) && p.images.length ? p.images : [p.img];
   const body = document.getElementById("productModalBody");
   body.innerHTML = `
-    <img src="${p.img}" alt="${p.name}">
+    <div class="modal-gallery">
+      <img src="${images[0]}" alt="${p.name}" id="modalMainImg">
+      ${images.length > 1 ? `
+        <div class="modal-thumbs">
+          ${images.map((img, i) => `<img src="${img}" class="modal-thumb${i === 0 ? " active" : ""}" data-src="${img}" alt="${p.name} ${i + 1}">`).join("")}
+        </div>` : ""}
+    </div>
     <div>
       <div class="modal-cat">${p.category}</div>
       <h2 class="modal-name">${p.name}</h2>
@@ -152,6 +159,13 @@ function openProductModal(id) {
       <button class="btn-primary full-width" id="modalAddBtn">Sepete Ekle</button>
     </div>
   `;
+  body.querySelectorAll(".modal-thumb").forEach(thumb => {
+    thumb.onclick = () => {
+      document.getElementById("modalMainImg").src = thumb.dataset.src;
+      body.querySelectorAll(".modal-thumb").forEach(t => t.classList.remove("active"));
+      thumb.classList.add("active");
+    };
+  });
   document.getElementById("modalAddBtn").onclick = () => { addToCart(p.id); closeProductModal(); };
   document.getElementById("productModalOverlay").classList.add("open");
 }
