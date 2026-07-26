@@ -212,6 +212,14 @@ img { max-width: 100%; display: block; }
 .product-modal .close-btn { position: absolute; top: 14px; right: 16px; font-size: 20px; }
 .product-modal-body { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
 .product-modal-body img { border-radius: 8px; width: 100%; aspect-ratio: 1/1; object-fit: cover; }
+.modal-gallery { display: flex; flex-direction: column; gap: 10px; }
+.modal-thumbs { display: flex; gap: 8px; flex-wrap: wrap; }
+.modal-thumbs img {
+  width: 56px; height: 56px; aspect-ratio: 1/1; object-fit: cover; border-radius: 6px;
+  cursor: pointer; opacity: 0.6; border: 2px solid transparent; transition: opacity 0.15s ease, border-color 0.15s ease;
+}
+.modal-thumbs img:hover { opacity: 0.9; }
+.modal-thumbs img.active { opacity: 1; border-color: var(--gold); }
 .modal-cat { color: var(--gray); font-size: 12px; text-transform: uppercase; margin-bottom: 6px; }
 .modal-name { font-size: 22px; margin-bottom: 12px; }
 .modal-price-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 16px; }
